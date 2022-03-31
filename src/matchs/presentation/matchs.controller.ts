@@ -1,9 +1,11 @@
 import {Controller, Get, Post, Body, Patch, Param, Delete} from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import {MatchsService} from '../application/matchs.service';
 import {CreateMatchDto} from './dto/create-match.dto';
 import {UpdateMatchDto} from './dto/update-match.dto';
 
 @Controller('matchs')
+@ApiTags('matchs')
 export class MatchsController {
     constructor(private readonly matchsService: MatchsService) {
     }

@@ -1,5 +1,6 @@
 import {Injectable} from '@nestjs/common';
 import {ProfileDao} from "../persistence/dao/profile.dao";
+import { ProfilesRepository } from '../persistence/profiles.repository';
 import {Profile} from "./model/profile.model";
 
 @Injectable()

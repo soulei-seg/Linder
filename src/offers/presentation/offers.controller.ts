@@ -1,9 +1,11 @@
 import {Controller, Get, Post, Body, Patch, Param, Delete} from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import {OffersService} from '../application/offers.service';
 import {CreateOfferDto} from './dto/create-offer.dto';
 import {UpdateOfferDto} from './dto/update-offer.dto';
 
 @Controller('offers')
+@ApiTags('offers')
 export class OffersController {
     constructor(private readonly offersService: OffersService) {
     }

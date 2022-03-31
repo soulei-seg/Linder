@@ -1,5 +1,6 @@
 import {Injectable} from '@nestjs/common';
 import {RecruiterDao} from "../persistence/dao/recruiter.dao";
+import { RecruitersRepository } from '../persistence/recruiters.repository';
 import {Recruiter} from "./model/recruiter.model";
 
 @Injectable()

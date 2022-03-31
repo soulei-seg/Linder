@@ -1,9 +1,11 @@
 import {Controller, Get, Post, Body, Patch, Param, Delete} from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import {ContractsService} from '../application/contracts.service';
 import {CreateContractDto} from './dto/create-contract.dto';
 import {UpdateContractDto} from './dto/update-contract.dto';
 
 @Controller('contracts')
+@ApiTags('contracts')
 export class ContractsController {
     constructor(private readonly contractsService: ContractsService) {
     }

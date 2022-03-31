@@ -1,5 +1,6 @@
 import {Injectable} from '@nestjs/common';
 import {SkillDao} from "../persistence/dao/skill.dao";
+import { SkillsRepository } from '../persistence/skills.repository';
 import {Skill} from "./model/skill.model";
 
 @Injectable()

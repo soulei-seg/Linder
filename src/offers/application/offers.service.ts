@@ -1,5 +1,6 @@
 import {Injectable} from '@nestjs/common';
 import {OfferDao} from "../persistence/dao/offer.dao";
+import { OffersRepository } from '../persistence/offers.repository';
 import {Offer} from "./model/offer.model";
 
 @Injectable()
