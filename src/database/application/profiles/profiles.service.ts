@@ -9,15 +9,15 @@ export class ProfilesService {
     }
 
     public async create(profile: Profile): Promise<Profile> {
-        return this.profilesRepository.create(profile)
+        return this.mapDaoToModel(await this.profilesRepository.create(this.mapModelToDao(profile)))
     }
 
     public async findAll(): Promise<Profile[]> {
-        return this.profilesRepository.findAll()
+        return await this.profilesRepository.findAll()
     }
 
     public async findOne(id: number): Promise<Profile> {
-        return this.profilesRepository.findOne(id)
+        return await this.profilesRepository.findOne(id)
     }
 
     public async update(id: number, profile: Profile): Promise<void> {

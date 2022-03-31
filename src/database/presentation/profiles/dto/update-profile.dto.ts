@@ -12,7 +12,7 @@ export class UpdateProfileDto extends PartialType(CreateProfileDto) {
 
     description: string;
 
-    key_words: string;
+    key_words: string[];
 
     min_salary: string;
 

@@ -23,8 +23,8 @@ export class ProfilesRepository {
         return await this.database.findOne(id);
     }
 
-    public async update(id: number, profileDao: ProfileToUpdateDao): Promise<void> {
-        await this.database.update(await this.database.findOne(id), profileDao)
+    public async update(id: number, profileToUpdateDao: ProfileToUpdateDao): Promise<void> {
+        await this.database.update(await this.database.findOne(id), profileToUpdateDao)
     }
 
     public async remove(id: number): Promise<void> {

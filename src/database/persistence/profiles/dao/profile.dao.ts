@@ -20,8 +20,8 @@ export class ProfileDao {
     @Column()
     description: string;
 
-    @Column()
-    key_words: string;
+    @Column("varchar", { array: true })
+    key_words: string[];
 
     @Column()
     min_salary: string;
@@ -47,8 +47,8 @@ export class ProfileToAddDao {
     @Column()
     description: string;
 
-    @Column()
-    key_words: string;
+    @Column("varchar", { array: true })
+    key_words: string[];
 
     @Column()
     min_salary: string;
@@ -56,7 +56,7 @@ export class ProfileToAddDao {
     @Column()
     offer_type: string;
 
-    constructor(photo_url: string, first_name: string, last_name: string, email: string, description: string, key_words: string, min_salary: string, offer_type: string) {
+    constructor(photo_url: string, first_name: string, last_name: string, email: string, description: string, key_words: string[], min_salary: string, offer_type: string) {
         this.photo_url = photo_url;
         this.first_name = first_name;
         this.last_name = last_name;
@@ -85,8 +85,8 @@ export class ProfileToUpdateDao {
     @Column()
     description: string;
 
-    @Column()
-    key_words: string;
+    @Column("varchar", { array: true })
+    key_words: string[];
 
     @Column()
     min_salary: string;
@@ -94,7 +94,7 @@ export class ProfileToUpdateDao {
     @Column()
     offer_type: string;
 
-    constructor(photo_url: string, first_name: string, last_name: string, email: string, description: string, key_words: string, min_salary: string, offer_type: string) {
+    constructor(photo_url: string, first_name: string, last_name: string, email: string, description: string, key_words: string[], min_salary: string, offer_type: string) {
         this.photo_url = photo_url;
         this.first_name = first_name;
         this.last_name = last_name;

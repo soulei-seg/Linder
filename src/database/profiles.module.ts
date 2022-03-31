@@ -6,7 +6,7 @@ import {ProfileDao, ProfileToAddDao} from "./persistence/profiles/dao/profile.da
 import {TypeOrmModule} from "@nestjs/typeorm";
 
 @Module({
-    imports: [TypeOrmModule.forFeature([ProfileDao, ProfileToAddDao])],
+    imports: [TypeOrmModule.forFeature([ProfileDao])],
     controllers: [ProfilesController],
     providers: [ProfilesService, ProfilesRepository, ProfileDao]
 })

@@ -8,7 +8,7 @@ export class OfferDao {
     @Column()
     description: string;
 
-    @Column()
+    @Column("varchar", { array: true })
     key_words: string[];
 
     @Column()
@@ -24,25 +24,18 @@ export class OfferDao {
     open_to_recruiters: boolean;
 }
 
-@Entity()
 export class OfferToAddDao {
 
-    @Column()
     description: string;
 
-    @Column()
     key_words: string[];
 
-    @Column()
     salary: number;
 
-    @Column()
     type: string;
 
-    @Column()
     status: string;
 
-    @Column()
     open_to_recruiters: boolean;
 }
 
