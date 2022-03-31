@@ -1,5 +1,6 @@
 import {Injectable} from '@nestjs/common';
 import {DatabaseDao} from "../persistence/dao/database.dao";
+import { DatabasesRepository } from '../persistence/databases.repository';
 import {Database} from "./model/database.model";
 
 @Injectable()
