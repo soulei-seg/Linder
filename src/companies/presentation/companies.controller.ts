@@ -11,10 +11,16 @@ export class CompaniesController {
     constructor(private readonly companiesService: CompaniesService) {
     }
 
-    @ApiResponse({status: 201, description: 'Create a new company'})
+    @ApiResponse({status: 201, type: CompanyDto, description: 'Create a new company'})
     @Post()
-    create(@Body() createCompanyDto: CreateCompanyDto) {
-        return this.companiesService.create(createCompanyDto);
+    create(@Body() createCompanyDto: CreateCompanyDto): CompanyDto {
+        const company = new CompanyDto();
+        company.name = "Linder"
+        company.siren = 324118892
+        company.description = "The greatest company of the world"
+        company.logo = "https://logo.fr/mon-logo.png"
+        company.date = "31/03/2022"
+        return company
     }
 
     @ApiResponse({status: 200, type: CompanyDto, isArray: true, description: 'Should fetch all companies'})

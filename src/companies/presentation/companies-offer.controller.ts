@@ -13,10 +13,17 @@ export class CompaniesOfferController {
     constructor(private readonly companiesService: CompaniesService) {
     }
 
-    @ApiResponse({status: 201, description: 'Create a new offer for a company'})
+    @ApiResponse({status: 201, type: CompanyOfferDto, description: 'Create a new offer for a company'})
     @Post()
-    create(@Param('companyId') companyId: string, @Body() createCompanyOfferDto: CreateCompanyOfferDto) {
-        return this.companiesService.create(createCompanyOfferDto);
+    create(@Param('companyId') companyId: string, @Body() createCompanyOfferDto: CreateCompanyOfferDto): CompanyOfferDto {
+        const offer = new CompanyOfferDto()
+        offer.description = "Superbe offre"
+        offer.keywords = ['php']
+        offer.salary = 320000
+        offer.type = ['CDI']
+        offer.status = 'Open'
+        offer.isOpen = true
+        return offer
     }
 
     @ApiResponse({status: 200, type: CompanyOfferDto, isArray: true, description: 'Get all offers for a company'})
