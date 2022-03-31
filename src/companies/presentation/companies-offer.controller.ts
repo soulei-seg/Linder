@@ -26,7 +26,7 @@ export class CompaniesOfferController {
         offer.keys = ['php']
         offer.salary = 320000
         offer.type = ['CDI']
-        offer.status = ['Open']
+        offer.status = 'Open'
         offer.isOpen = true
         return [offer]
     }
@@ -45,7 +45,7 @@ export class CompaniesOfferController {
         offer.keys = ['php']
         offer.salary = 320000
         offer.type = ['CDI']
-        offer.status = ['Open']
+        offer.status = 'Open'
         offer.isOpen = true
         return offer
     }
@@ -87,6 +87,4 @@ export class CompaniesOfferController {
     swipe(@Param(':id') id: string, @Param('companyId') companyId: string, @Body() swipeProfile: SwipeProfileDto) {
         return;
     }
-
-
 }

@@ -4,6 +4,8 @@ import {CandidatesService} from '../application/candidates.service';
 import { CandidateDto } from './dto/candidate.dto';
 import {CreateCandidateDto} from './dto/create-candidate.dto';
 import {UpdateCandidateDto} from './dto/update-candidate.dto';
+import {OfferDto} from "./dto/offer.dto";
+import {SwipeOfferDto} from "./dto/swipe-offer.dto";
 
 @Controller('candidates')
 @ApiTags('candidates')
@@ -71,5 +73,37 @@ export class CandidatesController {
     @ApiResponse({ status: 200, description: 'Delete a candidate.'})
     remove(@Param('id') id: string) {
         return ;
+    }
+
+    @Get(':id/companies')
+    @ApiResponse({ status: 200, description: 'Get all potential offers for the given candidate.', type: OfferDto, isArray: true})
+    getPotentialCompanies(@Param('id') candidateId: string): OfferDto[] {
+        const offer = new OfferDto();
+        offer.description = 'Challenging job with a lot of opportunities !'
+        offer.keys = ['Javascript', 'NestJS', 'Scrum', 'Coffee Drinker'];
+        offer.salary = 37500;
+        offer.type = ['CDI'];
+        offer.status = 'Open';
+        offer.isOpen = false;
+        return [offer]
+    }
+
+    @Get(':id/matchs')
+    @ApiResponse({ status: 200, description: 'Get all matchs for the given candidate.', type: OfferDto, isArray: true})
+    getMatchs(@Param('id') candidateId: string): OfferDto[] {
+        const offer = new OfferDto();
+        offer.description = 'Challenging job with a lot of opportunities !'
+        offer.keys = ['Javascript', 'NestJS', 'Scrum', 'Coffee Drinker'];
+        offer.salary = 37500;
+        offer.type = ['CDI'];
+        offer.status = 'Open';
+        offer.isOpen = false;
+        return [offer]
+    }
+
+    @ApiResponse({status: 201, description: 'Swipe an offer that might match with the candidate'})
+    @Post(':id')
+    swipe(@Param(':id') candidateId: string, @Body() swipeProfile: SwipeOfferDto) {
+        return;
     }
 }
