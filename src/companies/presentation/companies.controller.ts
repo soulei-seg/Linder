@@ -1,8 +1,8 @@
 import {Controller, Get, Post, Body, Patch, Param, Delete} from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import {CompaniesService} from '../application/companies.service';
-import {CreateCompanyDto} from './dto/create-company.dto';
-import {UpdateCompanyDto} from './dto/update-company.dto';
+import {CreateCompanyDto} from './dto/company/create-company.dto';
+import {UpdateCompanyDto} from './dto/company/update-company.dto';
 
 @Controller('companies')
 @ApiTags('companies')
@@ -17,21 +17,21 @@ export class CompaniesController {
 
     @Get()
     findAll() {
-        return this.companiesService.findAll();
+        return [];
     }
 
     @Get(':id')
     findOne(@Param('id') id: string) {
-        return this.companiesService.findOne(+id);
+        return null;
     }
 
     @Patch(':id')
     update(@Param('id') id: string, @Body() updateCompanyDto: UpdateCompanyDto) {
-        return this.companiesService.update(+id, updateCompanyDto);
+        return null;
     }
 
     @Delete(':id')
     remove(@Param('id') id: string) {
-        return this.companiesService.remove(+id);
+        return null;
     }
 }
