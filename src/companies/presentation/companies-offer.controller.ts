@@ -23,10 +23,10 @@ export class CompaniesOfferController {
     findAll(@Param('companyId') companyId: string): CompanyOfferDto[] {
         const offer = new CompanyOfferDto()
         offer.description = "Superbe offre"
-        offer.keys = ['php']
+        offer.keywords = ['php']
         offer.salary = 320000
         offer.type = ['CDI']
-        offer.status = ['Open']
+        offer.status = 'Open'
         offer.isOpen = true
         return [offer]
     }
@@ -42,10 +42,10 @@ export class CompaniesOfferController {
     update(@Param('id') id: string, @Param('companyId') companyId: string, @Body() updateCompanyOfferDto: UpdateCompanyOfferDto): CompanyOfferDto {
         const offer = new CompanyOfferDto()
         offer.description = "Superbe offre"
-        offer.keys = ['php']
+        offer.keywords = ['php']
         offer.salary = 320000
         offer.type = ['CDI']
-        offer.status = ['Open']
+        offer.status = 'Open'
         offer.isOpen = true
         return offer
     }
@@ -87,6 +87,4 @@ export class CompaniesOfferController {
     swipe(@Param(':id') id: string, @Param('companyId') companyId: string, @Body() swipeProfile: SwipeProfileDto) {
         return;
     }
-
-
 }
