@@ -10,9 +10,6 @@ import {OffersModule} from "./offers/offers.module";
 import {ProfilesModule} from "./profiles/profiles.module";
 import {RecruitersModule} from "./recruiters/recruiters.module";
 import {SkillsModule} from "./skills/skills.module";
-import {TypeOrmModule} from "@nestjs/typeorm";
-import {OfferDao} from "./database/persistence/offers/dao/offer.dao";
-import {ProfileDao} from "./database/persistence/profiles/dao/profile.dao";
 
 @Module({
     imports: [DatabasesModule,
@@ -23,17 +20,7 @@ import {ProfileDao} from "./database/persistence/profiles/dao/profile.dao";
         OffersModule,
         ProfilesModule,
         RecruitersModule,
-        SkillsModule,
-        TypeOrmModule.forRoot({
-            type: 'postgres',
-            host: 'cours-architecture-db.florianlafuente.com',
-            port: 12345,
-            username: 'admin',
-            password: 'Passw0rd',
-            database: 'linder',
-            entities: [OfferDao, ProfileDao],
-            synchronize: true,
-        })
+        SkillsModule
     ],
     controllers: [AppController],
     providers: [AppService],

@@ -3,6 +3,7 @@ import {CreateOfferDto} from "./dto/create-offer.dto";
 import {UpdateOfferDto} from "./dto/update-offer.dto";
 import {OffersService} from "../../application/offers/offers.service";
 import {ApiTags} from "@nestjs/swagger";
+import {OfferDto} from "./dto/offer.dto";
 
 @Controller('databases/offers')
 @ApiTags('databases')
@@ -11,27 +12,27 @@ export class OffersController {
     }
 
     @Post()
-    create(@Body() createOfferDto: CreateOfferDto) {
-        return this.offersService.create(createOfferDto);
+    public async create(@Body() createOfferDto: CreateOfferDto): Promise<OfferDto> {
+        return await this.offersService.create(createOfferDto);
     }
 
     @Get()
-    findAll() {
-        return this.offersService.findAll();
+    public async findAll(): Promise<OfferDto[]> {
+        return await this.offersService.findAll();
     }
 
     @Get(':id')
-    findOne(@Param('id') id: string) {
-        return this.offersService.findOne(+id);
+    public async findOne(@Param('id') id: string): Promise<OfferDto> {
+        return await this.offersService.findOne(+id);
     }
 
     @Patch(':id')
-    update(@Param('id') id: string, @Body() updateOfferDto: UpdateOfferDto) {
-        return this.offersService.update(+id, updateOfferDto);
+    public async update(@Param('id') id: string, @Body() updateOfferDto: UpdateOfferDto): Promise<void> {
+        return await this.offersService.update(+id, updateOfferDto);
     }
 
     @Delete(':id')
-    remove(@Param('id') id: string) {
-        return this.offersService.remove(+id);
+    public async remove(@Param('id') id: string): Promise<void> {
+        return await this.offersService.remove(+id);
     }
 }

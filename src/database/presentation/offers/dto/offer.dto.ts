@@ -1,3 +1,6 @@
+import {CompanyDao} from "../../../persistence/companies/dao/company.dao";
+import {ProfileDao} from "../../../persistence/profiles/dao/profile.dao";
+
 export class OfferDto {
     description: string;
 
@@ -10,4 +13,8 @@ export class OfferDto {
     status: string;
 
     open_to_recruiters: boolean;
+
+    profiles: ProfileDao[];
+
+    company: CompanyDao;
 }

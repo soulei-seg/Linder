@@ -1,4 +1,7 @@
-import {Column, Entity, PrimaryGeneratedColumn} from 'typeorm';
+import {Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToOne, PrimaryGeneratedColumn} from 'typeorm';
+import {OfferDao} from "../../offers/dao/offer.dao";
+import {MatchDao} from "../../matches/dao/match.dao";
+import {ContractDao} from "../../contracts/dao/contract.dao";
 
 @Entity()
 export class ProfileDao {
@@ -20,7 +23,7 @@ export class ProfileDao {
     @Column()
     description: string;
 
-    @Column("varchar", { array: true })
+    @Column("varchar", {array: true})
     key_words: string[];
 
     @Column()
@@ -28,33 +31,41 @@ export class ProfileDao {
 
     @Column()
     offer_type: string;
+
+    @ManyToMany(() => OfferDao)
+    @JoinTable()
+    offers: OfferDao[]
+
+    @OneToOne(() => ContractDao, (contract) => contract.profile)
+    @JoinColumn()
+    contract: ContractDao;
+
+    @ManyToOne(() => MatchDao, (match) => match.profile)
+    matches: MatchDao[];
 }
 
-@Entity()
 export class ProfileToAddDao {
-    @Column()
     photo_url: string;
 
-    @Column()
     first_name: string;
 
-    @Column()
     last_name: string;
 
-    @Column()
     email: string;
 
-    @Column()
     description: string;
 
-    @Column("varchar", { array: true })
     key_words: string[];
 
-    @Column()
     min_salary: string;
 
-    @Column()
     offer_type: string;
+
+    offers: OfferDao[];
+
+    contract: ContractDao;
+
+    matches: MatchDao[];
 
     constructor(photo_url: string, first_name: string, last_name: string, email: string, description: string, key_words: string[], min_salary: string, offer_type: string) {
         this.photo_url = photo_url;
@@ -68,31 +79,28 @@ export class ProfileToAddDao {
     }
 }
 
-@Entity()
 export class ProfileToUpdateDao {
-    @Column()
     photo_url: string;
 
-    @Column()
     first_name: string;
 
-    @Column()
     last_name: string;
 
-    @Column()
     email: string;
 
-    @Column()
     description: string;
 
-    @Column("varchar", { array: true })
     key_words: string[];
 
-    @Column()
     min_salary: string;
 
-    @Column()
     offer_type: string;
+
+    offers: OfferDao[];
+
+    contract: ContractDao;
+
+    matches: MatchDao[];
 
     constructor(photo_url: string, first_name: string, last_name: string, email: string, description: string, key_words: string[], min_salary: string, offer_type: string) {
         this.photo_url = photo_url;

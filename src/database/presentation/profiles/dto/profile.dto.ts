@@ -9,13 +9,13 @@ export class ProfileDto {
 
     description: string;
 
-    key_words: string;
+    key_words: string[];
 
     min_salary: string;
 
     offer_type: string;
 
-    constructor(photo_url: string, first_name: string, last_name: string, email: string, description: string, key_words: string, min_salary: string, offer_type: string) {
+    constructor(photo_url: string, first_name: string, last_name: string, email: string, description: string, key_words: string[], min_salary: string, offer_type: string) {
         this.photo_url = photo_url;
         this.first_name = first_name;
         this.last_name = last_name;

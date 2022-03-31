@@ -21,7 +21,7 @@ export class ProfilesService {
     }
 
     public async update(id: number, profile: Profile): Promise<void> {
-        await this.profilesRepository.update(id, profile)
+        await this.profilesRepository.update(id, this.mapModelToDao(profile))
     }
 
     public async remove(id: number): Promise<void> {
