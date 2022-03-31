@@ -23,7 +23,7 @@ export class CompaniesOfferController {
     findAll(@Param('companyId') companyId: string): CompanyOfferDto[] {
         const offer = new CompanyOfferDto()
         offer.description = "Superbe offre"
-        offer.keys = ['php']
+        offer.keywords = ['php']
         offer.salary = 320000
         offer.type = ['CDI']
         offer.status = 'Open'
@@ -42,7 +42,7 @@ export class CompaniesOfferController {
     update(@Param('id') id: string, @Param('companyId') companyId: string, @Body() updateCompanyOfferDto: UpdateCompanyOfferDto): CompanyOfferDto {
         const offer = new CompanyOfferDto()
         offer.description = "Superbe offre"
-        offer.keys = ['php']
+        offer.keywords = ['php']
         offer.salary = 320000
         offer.type = ['CDI']
         offer.status = 'Open'

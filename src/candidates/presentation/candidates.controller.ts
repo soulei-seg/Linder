@@ -80,7 +80,7 @@ export class CandidatesController {
     getPotentialCompanies(@Param('id') candidateId: string): OfferDto[] {
         const offer = new OfferDto();
         offer.description = 'Challenging job with a lot of opportunities !'
-        offer.keys = ['Javascript', 'NestJS', 'Scrum', 'Coffee Drinker'];
+        offer.keywords = ['Javascript', 'NestJS', 'Scrum', 'Coffee Drinker'];
         offer.salary = 37500;
         offer.type = ['CDI'];
         offer.status = 'Open';
@@ -93,7 +93,7 @@ export class CandidatesController {
     getMatchs(@Param('id') candidateId: string): OfferDto[] {
         const offer = new OfferDto();
         offer.description = 'Challenging job with a lot of opportunities !'
-        offer.keys = ['Javascript', 'NestJS', 'Scrum', 'Coffee Drinker'];
+        offer.keywords = ['Javascript', 'NestJS', 'Scrum', 'Coffee Drinker'];
         offer.salary = 37500;
         offer.type = ['CDI'];
         offer.status = 'Open';

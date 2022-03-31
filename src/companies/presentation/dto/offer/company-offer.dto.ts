@@ -4,7 +4,7 @@ export class CompanyOfferDto {
     @ApiProperty()
     description: string
     @ApiProperty()
-    keys: string[]
+    keywords: string[]
     @ApiProperty()
     salary: number
     @ApiProperty()
