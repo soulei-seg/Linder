@@ -1,5 +1,5 @@
 import {Controller, Get, Post, Body, Patch, Param, Delete} from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import {ApiResponse, ApiTags } from '@nestjs/swagger';
 import {CandidatesService} from '../application/candidates.service';
 import { CandidateDto } from './dto/candidate.dto';
 import {CreateCandidateDto} from './dto/create-candidate.dto';
@@ -12,7 +12,8 @@ export class CandidatesController {
     }
 
     @Post()
-    create(@Body() createCandidateDto: CreateCandidateDto) : CandidateDto{
+    @ApiResponse({ status: 200, description: 'Create one candidate.'})
+        create(@Body() createCandidateDto: CreateCandidateDto) : CandidateDto{
         const candidate = new CandidateDto();
         candidate.picture = 'https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png'
         candidate.firstname = 'Sam';
@@ -25,11 +26,13 @@ export class CandidatesController {
     }
 
     @Get()
+    @ApiResponse({ status: 200, description: 'Get all candidates.'})
     findAll() {
         return this.candidatesService.findAll();
     }
 
     @Get(':id')
+    @ApiResponse({ status: 200, description: 'Get one candidate.'})
     findOne(@Param('id') id: string) : CandidateDto{
         const candidate = new CandidateDto();
         candidate.picture = 'https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png'
@@ -43,6 +46,7 @@ export class CandidatesController {
     }
 
     @Patch(':id')
+    @ApiResponse({ status: 200, description: 'Edit a candidate.'})
     update(@Param('id') id: string, @Body() updateCandidateDto: UpdateCandidateDto) : CandidateDto{
         const candidate = new CandidateDto();
         candidate.picture = 'https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png'
@@ -56,6 +60,7 @@ export class CandidatesController {
     }
 
     @Delete(':id')
+    @ApiResponse({ status: 200, description: 'Delete a candidate.'})
     remove(@Param('id') id: string) {
         return this.candidatesService.remove(+id);
     }
