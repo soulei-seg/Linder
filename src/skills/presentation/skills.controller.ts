@@ -5,7 +5,7 @@ import {CreateSkillDto} from './dto/create-skill.dto';
 import {UpdateSkillDto} from './dto/update-skill.dto';
 
 @Controller('skills')
-@ApiTags('skill')
+@ApiTags('skills')
 export class SkillsController {
     constructor(private readonly skillsService: SkillsService) {
     }

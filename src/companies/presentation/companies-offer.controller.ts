@@ -2,12 +2,13 @@ import {Controller, Get, Post, Body, Patch, Param, Delete} from '@nestjs/common'
 import {CompaniesService} from '../application/companies.service';
 import {CreateCompanyOfferDto} from './dto/offer/create-company-offer.dto';
 import {UpdateCompanyOfferDto} from './dto/offer/update-company-offer.dto';
-import {ApiResponse} from "@nestjs/swagger";
+import {ApiResponse, ApiTags} from "@nestjs/swagger";
 import {CompanyOfferDto} from "./dto/offer/company-offer.dto";
 import {ProfileDto} from "./dto/profile/profile.dto";
 import {SwipeProfileDto} from "./dto/profile/swipe-profile.dto";
 
 @Controller('companies/:companyId/offers')
+@ApiTags('companies')
 export class CompaniesOfferController {
     constructor(private readonly companiesService: CompaniesService) {
     }
