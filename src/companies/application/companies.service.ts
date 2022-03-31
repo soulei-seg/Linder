@@ -8,33 +8,46 @@ export class CompaniesService {
     constructor(private readonly companiesRepository: CompaniesRepository) {
     }
 
-    create(company: Company) {
-        return this.companiesRepository.create(company)
+    async create(company: Company): Promise<number> {
+        const companyId: number = await this.companiesRepository.create(this.mapModelToDao(company))
+        return companyId;
     }
 
     findAll() {
-        return this.companiesRepository.findAll()
+        return ;
     }
 
     findOne(id: number) {
-        return this.companiesRepository.findOne(id)
+        return ;
     }
 
     update(id: number, company: Company) {
-        return this.companiesRepository.update(id, company)
+        return ;
     }
 
     remove(id: number) {
-        return this.companiesRepository.remove(id)
+        return ;
     }
 
     private mapDaoToModel(companyDao: CompanyDao): Company {
         const company = new Company();
+        company.id = companyDao.id;
+        company.name = companyDao.name;
+        company.date = companyDao.date;
+        company.logo = companyDao.logo;
+        company.siren = companyDao.siren;
+        company.description = companyDao.description;
         return company;
     }
 
     private mapModelToDao(company: Company): CompanyDao {
         const companyDao = new CompanyDao();
+        companyDao.id = company.id;
+        companyDao.name = company.name;
+        companyDao.date = company.date;
+        companyDao.logo = company.logo;
+        companyDao.siren = company.siren;
+        companyDao.description = company.description;
         return companyDao;
     }
 }

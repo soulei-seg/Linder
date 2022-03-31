@@ -11,7 +11,7 @@ export class CompanyRepository {
     ) {
     }
 
-    public async create(companyToAddDao: CompanyToAddDao): Promise<CompanyDao> {
+    public async create(companyToAddDao: CompanyDao): Promise<CompanyDao> {
         return await this.database.save(companyToAddDao);
     }
 
@@ -23,8 +23,8 @@ export class CompanyRepository {
         return await this.database.findOne(id);
     }
 
-    public async update(id: number, companyToUpdateDao: CompanyToUpdateDao): Promise<void> {
-        await this.database.update(await this.database.findOne(id), companyToUpdateDao)
+    public async update(id: number, companyToUpdateDao: CompanyDao): Promise<CompanyDao> {
+        return (await this.database.update(await this.database.findOne(id), companyToUpdateDao)).raw
     }
 
     public async remove(id: number): Promise<void> {

@@ -1,4 +1,4 @@
-export class CompanyDao {
+export class CompanyDto {
     id: number
     name: string
     siren: number

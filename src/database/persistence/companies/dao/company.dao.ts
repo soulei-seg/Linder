@@ -4,7 +4,7 @@ import {OfferDao} from "../../offers/dao/offer.dao";
 @Entity()
 export class CompanyDao {
     @PrimaryGeneratedColumn()
-    id: string;
+    id: number;
 
     @Column()
     name: string;
@@ -16,10 +16,10 @@ export class CompanyDao {
     description: string;
 
     @Column()
-    logo_url: string;
+    logo: string;
 
     @Column()
-    registration_date: string;
+    date: string;
 
     @OneToMany(() => OfferDao, (offer) => offer.company)
     offers: OfferDao[]
