@@ -35,7 +35,7 @@ export class OffersController {
         const offer = new OfferDto()
         offer.description = "Nouvelle offre"
         offer.keywords = ['PHP', 'html']
-        offer.status = "is Open"
+        offer.status = "Open"
         offer.salary = 24000
         offer.isOpen = false
         return offer
