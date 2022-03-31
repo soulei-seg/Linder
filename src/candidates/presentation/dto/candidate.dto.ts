@@ -10,9 +10,9 @@ export class CandidateDto {
     @ApiProperty()
     mail: string
     @ApiProperty()
-    keywords: []
+    keywords: string[]
     @ApiProperty()
     salary: number
     @ApiProperty()
-    offerType: number
+    offerType: string[]
 }
