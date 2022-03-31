@@ -12,13 +12,13 @@ export class CompaniesOfferController {
     constructor(private readonly companiesService: CompaniesService) {
     }
 
-    @ApiResponse({status: 200, description: 'Create a new offer for a company'})
+    @ApiResponse({status: 201, description: 'Create a new offer for a company'})
     @Post()
     create(@Param('companyId') companyId: string, @Body() createCompanyOfferDto: CreateCompanyOfferDto) {
         return this.companiesService.create(createCompanyOfferDto);
     }
 
-    @ApiResponse({status: 200, description: 'Get all offers for a company'})
+    @ApiResponse({status: 200, type: CompanyOfferDto, isArray: true, description: 'Get all offers for a company'})
     @Get()
     findAll(@Param('companyId') companyId: string): CompanyOfferDto[] {
         const offer = new CompanyOfferDto()
@@ -37,7 +37,7 @@ export class CompaniesOfferController {
         return this.companiesService.findOne(+id);
     }
 
-    @ApiResponse({status: 200, description: 'Update an offer for a company'})
+    @ApiResponse({status: 200, type: CompanyOfferDto, description: 'Update an offer for a company'})
     @Patch(':id')
     update(@Param('id') id: string, @Param('companyId') companyId: string, @Body() updateCompanyOfferDto: UpdateCompanyOfferDto): CompanyOfferDto {
         const offer = new CompanyOfferDto()
@@ -56,7 +56,7 @@ export class CompaniesOfferController {
         return;
     }
 
-    @ApiResponse({status: 200, description: 'Get all profiles candidates that might match with the offer'})
+    @ApiResponse({status: 200, type: ProfileDto, isArray: true, description: 'Get all profiles candidates that might match with the offer'})
     @Get(':id/candidates/')
     findAllProfile(@Param(':id') id: string, @Param('candidateId') candidateId: string): ProfileDto[]{
         const profile = new ProfileDto()
@@ -69,7 +69,7 @@ export class CompaniesOfferController {
         return [profile]
     }
 
-    @ApiResponse({status: 200, description: 'Get a profile that might match with the offer'})
+    @ApiResponse({status: 200, type: ProfileDto, description: 'Get a profile that might match with the offer'})
     @Get(':id/matches/')
     findOneProfile(@Param(':id') id: string, @Param('companyId') companyId: string): ProfileDto {
         const profile = new ProfileDto()
@@ -82,7 +82,7 @@ export class CompaniesOfferController {
         return profile
     }
 
-    @ApiResponse({status: 200, description: 'Swipe a profile that might match with the offer'})
+    @ApiResponse({status: 201, description: 'Swipe a profile that might match with the offer'})
     @Post(':id')
     swipe(@Param(':id') id: string, @Param('companyId') companyId: string, @Body() swipeProfile: SwipeProfileDto) {
         return;

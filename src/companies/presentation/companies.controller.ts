@@ -11,13 +11,13 @@ export class CompaniesController {
     constructor(private readonly companiesService: CompaniesService) {
     }
 
-    @ApiResponse({status: 200, description: 'Create a new company'})
+    @ApiResponse({status: 201, description: 'Create a new company'})
     @Post()
     create(@Body() createCompanyDto: CreateCompanyDto) {
         return this.companiesService.create(createCompanyDto);
     }
 
-    @ApiResponse({status: 200, description: 'Should fetch all companies'})
+    @ApiResponse({status: 200, type: CompanyDto, isArray: true, description: 'Should fetch all companies'})
     @Get()
     findAll(): CompanyDto[] {
         const company = new CompanyDto();
@@ -29,7 +29,7 @@ export class CompaniesController {
         return [company]
     }
 
-    @ApiResponse({status: 200, description: 'Should fetch a company'})
+    @ApiResponse({status: 200, type: CompanyDto, description: 'Should fetch a company'})
     @Get(':id')
     findOne(@Param('id') id: string): CompanyDto {
         const company = new CompanyDto();
@@ -41,7 +41,7 @@ export class CompaniesController {
         return company
     }
 
-    @ApiResponse({status: 200, description: 'Should update a company'})
+    @ApiResponse({status: 200, type: CompanyDto, description: 'Should update a company'})
     @Patch(':id')
     update(@Param('id') id: string, @Body() updateCompanyDto: UpdateCompanyDto): CompanyDto {
         const company = new CompanyDto();
