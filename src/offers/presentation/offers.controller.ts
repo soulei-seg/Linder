@@ -11,10 +11,16 @@ export class OffersController {
     constructor(private readonly offersService: OffersService) {
     }
 
-    @ApiResponse({status: 201, description: 'Create a new offer'})
+    @ApiResponse({status: 201, type: OfferDto, description: 'Create a new offer'})
     @Post()
-    create(@Body() createOfferDto: CreateOfferDto) {
-        return this.offersService.create(createOfferDto);
+    create(@Body() createOfferDto: CreateOfferDto): OfferDto {
+        const offer = new OfferDto()
+        offer.description = "Nouvelle offre"
+        offer.keywords = ['PHP', 'html']
+        offer.status = "is Open"
+        offer.salary = 24000
+        offer.isOpen = false
+        return offer
     }
 
     @ApiResponse({status: 200, type: OfferDto, isArray: true, description: 'Get all offers'})
@@ -56,6 +62,6 @@ export class OffersController {
     @ApiResponse({status: 200, description: 'Delete an offer'})
     @Delete(':id')
     remove(@Param('id') id: string) {
-        return this.offersService.remove(+id);
+        return;
     }
 }
