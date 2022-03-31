@@ -12,9 +12,10 @@ import {RecruitersModule} from "./recruiters/recruiters.module";
 import {SkillsModule} from "./skills/skills.module";
 import {TypeOrmModule} from "@nestjs/typeorm";
 import {OfferDao} from "./database/persistence/offers/dao/offer.dao";
+import {ProfileDao} from "./database/persistence/profiles/dao/profile.dao";
 
 @Module({
-    imports: [
+    imports: [DatabasesModule,
         CandidatesModule,
         CompaniesModule,
         ContractsModule,
@@ -30,7 +31,7 @@ import {OfferDao} from "./database/persistence/offers/dao/offer.dao";
             username: 'admin',
             password: 'Passw0rd',
             database: 'linder',
-            entities: [OfferDao],
+            entities: [OfferDao, ProfileDao],
             synchronize: true,
         })
     ],
