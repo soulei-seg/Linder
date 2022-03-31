@@ -1,9 +1,11 @@
 import {Controller, Get, Post, Body, Patch, Param, Delete} from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import {DatabasesService} from '../application/databases.service';
 import {CreateDatabaseDto} from './dto/create-database.dto';
 import {UpdateDatabaseDto} from './dto/update-database.dto';
 
 @Controller('databases')
+@ApiTags('databases')
 export class DatabasesController {
     constructor(private readonly databasesService: DatabasesService) {
     }
