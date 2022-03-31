@@ -1,4 +1,5 @@
 import {Injectable} from '@nestjs/common';
+import { ContractsRepository } from '../persistence/contracts.repository';
 import {ContractDao} from "../persistence/dao/contract.dao";
 import {Contract} from "./model/contract.model";
 
