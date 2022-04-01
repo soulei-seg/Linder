@@ -45,6 +45,6 @@ describe('Gestion des profiles des candidats',  () => {
             .expect(200)
 
         expect(profile.body.salary).toEqual(32000);
-        expect(profile.body.description).toEqual("Bonjour, mon profil");
+        expect(profile.body.description).toEqual("Bonjour, mon profil.");
     });
 });

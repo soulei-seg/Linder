@@ -8,8 +8,9 @@ export class CandidatesService {
     constructor(private readonly candidatesRepository: CandidatesRepository) {
     }
 
-    create(candidate: Candidate) {
-        return this.candidatesRepository.create(candidate)
+    async create(candidate: Candidate): Promise<number> {
+        const candidateId: number = await this.candidatesRepository.create(candidate)
+        return candidateId;
     }
 
     findAll() {

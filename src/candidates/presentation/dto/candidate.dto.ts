@@ -2,17 +2,19 @@ import { ApiProperty } from "@nestjs/swagger"
 
 export class CandidateDto {
     @ApiProperty()
-    picture: string
+    photo_url: string
     @ApiProperty()
-    firstname: string
+    first_name: string
     @ApiProperty()
-    lastname: string
+    last_name: string
     @ApiProperty()
-    mail: string
+    description: string
     @ApiProperty()
-    keywords: string[]
+    email: string
+    @ApiProperty()
+    key_words: string[]
     @ApiProperty()
     salary: number
     @ApiProperty()
-    offerType: string[]
+    type: string[]
 }

@@ -1,10 +1,14 @@
 import {Injectable} from '@nestjs/common';
 import {CandidateDao} from "./dao/candidate.dao";
+import axios from "axios";
 
 @Injectable()
 export class CandidatesRepository {
-    create(candidate: CandidateDao) {
-        return 'This action adds a new cat';
+    BASE_URL: string = "http://localhost:3000/profiles";
+
+    async create(candidate: CandidateDao): Promise<number> {
+        const candidateId: number = (await axios.post(this.BASE_URL, candidate)).data;
+        return candidateId
     }
 
     findAll() {
