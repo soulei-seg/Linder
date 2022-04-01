@@ -1,7 +1,8 @@
 import {Injectable} from '@nestjs/common';
 import {ProfileDao} from "../persistence/dao/profile.dao";
-import { ProfilesRepository } from '../persistence/profiles.repository';
+import {ProfilesRepository} from '../persistence/profiles.repository';
 import {Profile} from "./model/profile.model";
+import {ProfileEmailAlreadyExistsException} from "../../exceptions/profiles-exceptions";
 
 @Injectable()
 export class ProfilesService {
@@ -9,24 +10,30 @@ export class ProfilesService {
     }
 
     async create(profile: Profile): Promise<number> {
-        const profileId: number = await this.profilesRepository.create(this.mapModelToDao(profile))
-        return profileId;
+        const profiles: Profile[] = await this.profilesRepository.findAll();
+
+        profiles.forEach((profileSaved) => {
+            if (profileSaved.email === profile.email) {
+                throw new ProfileEmailAlreadyExistsException();
+            }
+        })
+        return await this.profilesRepository.create(this.mapModelToDao(profile))
     }
 
     findAll() {
-        return ;
+        return;
     }
 
     findOne(id: number) {
-        return ;
+        return;
     }
 
     update(id: number, profile: Profile) {
-        return ;
+        return;
     }
 
     remove(id: number) {
-        return ;
+        return;
     }
 
     private mapDaoToModel(profileDao: ProfileDao): Profile {
@@ -45,7 +52,6 @@ export class ProfilesService {
 
     private mapModelToDao(profile: Profile): ProfileDao {
         const profileDao = new ProfileDao();
-        profileDao.id = profile.id
         profileDao.description = profile.description
         profileDao.last_name = profile.last_name
         profileDao.first_name = profile.first_name
