@@ -4,6 +4,7 @@ import {CreateProfileDto} from "./dto/create-profile.dto";
 import {UpdateProfileDto} from "./dto/update-profile.dto";
 import {ProfilesService} from "../../application/profiles/profiles.service";
 import {ProfileDto} from "./dto/profile.dto";
+import {Profile} from "../../application/profiles/model/profile.model";
 
 @Controller('databases/profiles')
 @ApiTags('databases')
@@ -12,8 +13,9 @@ export class ProfilesController {
     }
 
     @Post()
-    public async create(@Body() createProfileDto: CreateProfileDto): Promise<ProfileDto> {
-        return await this.profilesService.create(createProfileDto);
+    public async create(@Body() ProfileDto: CreateProfileDto): Promise<ProfileDto> {
+        const profile: Profile = await this.profilesService.create(ProfileDto)
+        return profile
     }
 
     @Get()
@@ -27,8 +29,8 @@ export class ProfilesController {
     }
 
     @Patch(':id')
-    public async update(@Param('id') id: string, @Body() updateProfileDto: UpdateProfileDto): Promise<void> {
-        return await this.profilesService.update(+id, updateProfileDto);
+    public async update(@Param('id') id: string, @Body() profileDto: ProfileDto): Promise<void> {
+        return await this.profilesService.update(+id, profileDto);
     }
 
     @Delete(':id')

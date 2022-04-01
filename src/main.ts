@@ -5,7 +5,7 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const config = new DocumentBuilder()
-      .setTitle('Tinder')
+      .setTitle('Linder')
       .setDescription('Contains all API\'s routes and methods.')
       .setVersion('1.0')
       .build();

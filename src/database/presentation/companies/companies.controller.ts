@@ -2,7 +2,7 @@ import {Body, Controller, Delete, Get, Param, Patch, Post} from '@nestjs/common'
 import {ApiTags} from "@nestjs/swagger";
 import {CompanyDto} from "./dto/company.dto";
 import {CompaniesService} from "../../application/companies/companies.service";
-import {Company} from "../../application/companies/model/offer.model";
+import {Company} from "../../application/companies/model/company.model";
 
 @Controller('databases/companies')
 @ApiTags('databases')

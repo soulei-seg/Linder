@@ -1,25 +1,29 @@
 import {Injectable} from '@nestjs/common';
 import {ProfileDao} from "./dao/profile.dao";
+import axios from "axios";
 
 @Injectable()
 export class ProfilesRepository {
-    create(profile: ProfileDao) {
-        return 'This action adds a new cat';
+    BASE_URL: string = "http://localhost:3000/databases/profiles";
+
+    async create(profile: ProfileDao): Promise<number> {
+        const profileDao: ProfileDao = (await axios.post(this.BASE_URL, profile)).data;
+        return profileDao.id;
     }
 
     findAll() {
-        return `This action returns all cats`;
+        return ;
     }
 
     findOne(id: number) {
-        return `This action returns a #${id} cat`;
+        return ;
     }
 
     update(id: number, profile: ProfileDao) {
-        return `This action updates a #${id} cat`;
+        return ;
     }
 
     remove(id: number) {
-        return `This action removes a #${id} cat`;
+        return ;
     }
 }
