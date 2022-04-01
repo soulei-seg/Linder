@@ -73,8 +73,8 @@ export class CompaniesOfferController {
 
     @ApiResponse({status: 200, type: ProfileDto, isArray: true, description: 'Get all profiles candidates that might match with the offer'})
     @Get(':id/candidates/')
-    async findAllProfile(@Param(':id') id: number, @Param('candidateId') candidateId: string): Promise<ProfileDto[]>{
-        return await this.companiesService.findPotentialProfiles(id);
+    async findAllProfile(@Param(':id') id: string, @Param('candidateId') candidateId: string): Promise<ProfileDto[]>{
+        return await this.companiesService.findPotentialProfiles(+id);
     }
 
     @ApiResponse({status: 200, type: ProfileDto, description: 'Get a profile that might match with the offer'})
