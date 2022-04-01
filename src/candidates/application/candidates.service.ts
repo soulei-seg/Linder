@@ -2,6 +2,7 @@ import {Injectable} from '@nestjs/common';
 import { CandidatesRepository } from '../persistence/candidates.repository';
 import {CandidateDao} from "../persistence/dao/candidate.dao";
 import {Candidate} from "./model/candidate.model";
+import {CandidateEmailAlreadyExistsException} from "../../exceptions/candidates-exceptions";
 
 @Injectable()
 export class CandidatesService {
@@ -9,8 +10,14 @@ export class CandidatesService {
     }
 
     async create(candidate: Candidate): Promise<number> {
-        const candidateId: number = await this.candidatesRepository.create(candidate)
-        return candidateId;
+        const candidates: Candidate[] = await this.candidatesRepository.findAll();
+
+        candidates.forEach((candidateSaved) => {
+            if (candidateSaved.email === candidate.email) {
+                throw new CandidateEmailAlreadyExistsException();
+            }
+        })
+        return await this.candidatesRepository.create(candidate)
     }
 
     findAll() {

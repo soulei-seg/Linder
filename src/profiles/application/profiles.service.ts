@@ -2,7 +2,6 @@ import {Injectable} from '@nestjs/common';
 import {ProfileDao} from "../persistence/dao/profile.dao";
 import {ProfilesRepository} from '../persistence/profiles.repository';
 import {Profile} from "./model/profile.model";
-import {ProfileEmailAlreadyExistsException} from "../../exceptions/profiles-exceptions";
 
 @Injectable()
 export class ProfilesService {
@@ -10,13 +9,6 @@ export class ProfilesService {
     }
 
     async create(profile: Profile): Promise<number> {
-        const profiles: Profile[] = await this.profilesRepository.findAll();
-
-        profiles.forEach((profileSaved) => {
-            if (profileSaved.email === profile.email) {
-                throw new ProfileEmailAlreadyExistsException();
-            }
-        })
         return await this.profilesRepository.create(this.mapModelToDao(profile))
     }
 

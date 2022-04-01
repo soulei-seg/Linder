@@ -1,4 +1,4 @@
-import {Controller, Get, Post, Body, Patch, Param, Delete} from '@nestjs/common';
+import {Controller, Get, Post, Body, Patch, Param, Delete, UseFilters} from '@nestjs/common';
 import {ApiResponse, ApiTags} from '@nestjs/swagger';
 import {CandidatesService} from '../application/candidates.service';
 import { CandidateDto } from './dto/candidate.dto';
@@ -6,6 +6,7 @@ import {CreateCandidateDto} from './dto/create-candidate.dto';
 import {UpdateCandidateDto} from './dto/update-candidate.dto';
 import {OfferDto} from "./dto/offer.dto";
 import {SwipeOfferDto} from "./dto/swipe-offer.dto";
+import {HttpExceptionFilter} from "../../exceptions/http-exception.filter";
 
 @Controller('candidates')
 @ApiTags('candidates')
@@ -13,6 +14,7 @@ export class CandidatesController {
     constructor(private readonly candidatesService: CandidatesService) {
     }
 
+    @UseFilters(new HttpExceptionFilter())
     @Post()
     @ApiResponse({ status: 201, description: 'Create one candidate.', type: CandidateDto})
     async create(@Body() createCandidateDto: CreateCandidateDto): Promise<number> {

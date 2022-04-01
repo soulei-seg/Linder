@@ -13,7 +13,6 @@ export class ProfilesController {
     constructor(private readonly profilesService: ProfilesService) {
     }
 
-    @UseFilters(new HttpExceptionFilter())
     @ApiResponse({status: 201, description: 'Create one profile.', type: ProfileDto})
     @Post()
     async create(@Body() createProfileDto: CreateProfileDto): Promise<number> {

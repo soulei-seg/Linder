@@ -11,8 +11,8 @@ export class CandidatesRepository {
         return candidateId
     }
 
-    findAll() {
-        return `This action returns all cats`;
+    async findAll() {
+        return (await axios.get(this.BASE_URL)).data;
     }
 
     findOne(id: number) {
