@@ -27,6 +27,7 @@ export class OffersController {
         offer.type = createOfferDto.type;
         // @ts-ignore
         offer.status = createOfferDto.status;
+
         // @ts-ignore
         offer.open_to_recruiters = createOfferDto.isOpen;
         // @ts-ignore
