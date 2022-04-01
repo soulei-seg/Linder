@@ -3,7 +3,7 @@ import {ProfileDao} from "../../profiles/dao/profile.dao";
 import {CompanyDao} from "../../companies/dao/company.dao";
 import {MatchDao} from "../../matches/dao/match.dao";
 import {ContractDao} from "../../contracts/dao/contract.dao";
-import {Company} from "../../../application/companies/model/offer.model";
+import {Company} from "../../../application/companies/model/company.model";
 
 @Entity()
 export class OfferDao {

@@ -16,13 +16,13 @@ export function generateMockOfferDto() {
 
 export function generateMockProfileDto(firstname: string = "Michael", lastname: string = "Jackson") {
     const profileDto = new ProfileDto();
-    profileDto.picture = "google.com/images/mock_image.png";
-    profileDto.firstname = "Michael";
-    profileDto.lastname = "Jackson";
-    profileDto.mail = (profileDto.firstname + "." + profileDto.lastname + "@gmail.com").toLowerCase();
-    profileDto.keywords = ["barman", "serveur"];
+    profileDto.photo_url = "google.com/images/mock_image.png";
+    profileDto.first_name = "Michael";
+    profileDto.last_name = "Jackson";
+    profileDto.email = (profileDto.first_name + "." + profileDto.last_name + "@gmail.com").toLowerCase();
+    profileDto.key_words = ["barman", "serveur"];
     profileDto.salary = 18.2;
-    profileDto.offerType = ["CDD", "CDI"];
+    profileDto.type = ["CDD", "CDI"];
     return profileDto;
 }
 
