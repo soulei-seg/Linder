@@ -19,9 +19,9 @@ describe('Gestion des profiles des candidats',  () => {
     it('/ (GET)', async () => {
         const createProfileDto: CreateProfileDto = new CreateProfileDto();
         // @ts-ignore
-        createProfileDto.salary = 36000;
+        createProfileDto.salary = 32000;
         // @ts-ignore
-        createProfileDto.description = "Bonjour, ..."
+        createProfileDto.description = "Bonjour, mon profil."
         // @ts-ignore
         createProfileDto.key_words = ['Micro-service', 'Java', 'Kotlin'];
         // @ts-ignore
@@ -35,7 +35,7 @@ describe('Gestion des profiles des candidats',  () => {
         // @ts-ignore
         createProfileDto.photo_url = 'https://picture.com/my-profile-picture.png'
         const response = await request(app.getHttpServer())
-            .post('/profiles/11/profile')
+            .post('/candidates')
             .send(createProfileDto)
             .expect(201)
         expect(response.text).not.toBeUndefined();
@@ -44,7 +44,7 @@ describe('Gestion des profiles des candidats',  () => {
             .get('/databases/profiles/' + response.text)
             .expect(200)
 
-        expect(profile.body.salary).toEqual(36000);
-        expect(profile.body.description).toEqual("Bonjour, ...");
+        expect(profile.body.salary).toEqual(32000);
+        expect(profile.body.description).toEqual("Bonjour, mon profil");
     });
 });
