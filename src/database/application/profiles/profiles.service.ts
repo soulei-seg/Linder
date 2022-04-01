@@ -1,7 +1,7 @@
 import {Injectable} from '@nestjs/common';
 import {ProfilesRepository} from "../../persistence/profiles/profiles.repository";
 import {Profile} from "./model/profile.model";
-import {ProfileDao, ProfileToAddDao} from "../../persistence/profiles/dao/profile.dao";
+import {ProfileDao} from "../../persistence/profiles/dao/profile.dao";
 
 @Injectable()
 export class ProfilesService {
@@ -9,7 +9,8 @@ export class ProfilesService {
     }
 
     public async create(profile: Profile): Promise<Profile> {
-        return this.mapDaoToModel(await this.profilesRepository.create(this.mapModelToDao(profile)))
+        const profileDao: ProfileDao = await this.profilesRepository.create(this.mapModelToDao(profile))
+        return this.mapDaoToModel(profileDao)
     }
 
     public async findAll(): Promise<Profile[]> {
@@ -29,10 +30,28 @@ export class ProfilesService {
     }
 
     private mapDaoToModel(profileDao: ProfileDao): Profile {
-        return new Profile(profileDao.photo_url, profileDao.first_name, profileDao.last_name, profileDao.email, profileDao.description, profileDao.key_words, profileDao.min_salary, profileDao.offer_type);
+        const profile: Profile = new Profile();
+        profile.id = profileDao.id
+        profile.description = profileDao.description
+        profile.email = profileDao.email
+        profile.key_words = profileDao.key_words
+        profile.first_name = profileDao.first_name
+        profile.last_name = profileDao.last_name
+        profile.salary = profileDao.salary
+        profile.type = profileDao.type
+        return profile;
     }
 
-    private mapModelToDao(profile: Profile): ProfileToAddDao {
-        return new ProfileToAddDao(profile.photo_url, profile.first_name, profile.last_name, profile.email, profile.description, profile.key_words, profile.min_salary, profile.offer_type);
+    private mapModelToDao(profile: Profile): ProfileDao {
+        const profileDao: ProfileDao = new ProfileDao();
+        profileDao.id = profile.id
+        profileDao.description = profile.description
+        profileDao.email = profile.email
+        profileDao.key_words = profile.key_words
+        profileDao.first_name = profile.first_name
+        profileDao.last_name = profile.last_name
+        profileDao.salary = profile.salary
+        profileDao.type = profile.type
+        return profileDao;
     }
 }

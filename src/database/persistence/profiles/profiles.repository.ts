@@ -1,5 +1,5 @@
 import {Injectable} from '@nestjs/common';
-import {ProfileDao, ProfileToAddDao, ProfileToUpdateDao} from "./dao/profile.dao";
+import {ProfileDao, ProfileToAddDao} from "./dao/profile.dao";
 import {InjectRepository} from "@nestjs/typeorm";
 import {Repository} from "typeorm";
 
@@ -23,8 +23,8 @@ export class ProfilesRepository {
         return await this.database.findOne(id);
     }
 
-    public async update(id: number, profileToUpdateDao: ProfileToUpdateDao): Promise<void> {
-        await this.database.update(await this.database.findOne(id), profileToUpdateDao)
+    public async update(id: number, profileToUpdateDao: ProfileDao): Promise<void> {
+        return (await this.database.update(await this.database.findOne(id), profileToUpdateDao)).raw
     }
 
     public async remove(id: number): Promise<void> {
