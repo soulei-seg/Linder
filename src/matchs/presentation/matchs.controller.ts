@@ -1,8 +1,10 @@
-import {Controller, Get, Post, Body, Patch, Param, Delete} from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import {Body, Controller, Delete, Get, Param, Patch, Post} from '@nestjs/common';
+import {ApiTags} from '@nestjs/swagger';
 import {MatchsService} from '../application/matchs.service';
 import {CreateMatchDto} from './dto/create-match.dto';
 import {UpdateMatchDto} from './dto/update-match.dto';
+import {MatchDto} from "./dto/match.dto";
+import {generateMockMatchDto} from "../../tools/generate-dto";
 
 @Controller('matchs')
 @ApiTags('matchs')
@@ -11,27 +13,27 @@ export class MatchsController {
     }
 
     @Post()
-    create(@Body() createMatchDto: CreateMatchDto) {
-        return this.matchsService.create(createMatchDto);
+    create(@Body() createMatchDto: CreateMatchDto): MatchDto {
+        return generateMockMatchDto();
     }
 
     @Get()
-    findAll() {
-        return this.matchsService.findAll();
+    findAll(): MatchDto[] {
+        return [generateMockMatchDto()];
     }
 
     @Get(':id')
-    findOne(@Param('id') id: string) {
-        return this.matchsService.findOne(+id);
+    findOne(@Param('id') id: string): MatchDto {
+        return generateMockMatchDto();
     }
 
     @Patch(':id')
-    update(@Param('id') id: string, @Body() updateMatchDto: UpdateMatchDto) {
-        return this.matchsService.update(+id, updateMatchDto);
+    update(@Param('id') id: string, @Body() updateMatchDto: UpdateMatchDto): MatchDto {
+        return generateMockMatchDto();
     }
 
     @Delete(':id')
-    remove(@Param('id') id: string) {
-        return this.matchsService.remove(+id);
+    remove(@Param('id') id: string): void {
+
     }
 }
