@@ -5,6 +5,7 @@ import {Company} from "./model/company.model";
 import {CompanyOffersRepository} from "../persistence/company-offers.repository";
 import {CompanyOffer} from "./model/company-offer.model";
 import {CompanyOfferDao} from "../persistence/dao/company-offer.dao";
+import {Profile} from "../../profiles/application/model/profile.model";
 
 @Injectable()
 export class CompaniesService {
@@ -33,6 +34,10 @@ export class CompaniesService {
 
     findAll() {
         return ;
+    }
+
+    async findPotentialProfiles(offerId : number): Promise<Profile[]> {
+        return await this.companyOffersRepository.findPotentialProfiles(offerId);
     }
 
     findOne(id: number) {
