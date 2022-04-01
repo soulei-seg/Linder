@@ -15,15 +15,22 @@ export class CompaniesOfferController {
 
     @ApiResponse({status: 201, type: CompanyOfferDto, description: 'Create a new offer for a company'})
     @Post()
-    create(@Param('companyId') companyId: string, @Body() createCompanyOfferDto: CreateCompanyOfferDto): CompanyOfferDto {
+    async create(@Param('companyId') companyId: string, @Body() createCompanyOfferDto: CreateCompanyOfferDto): Promise<number> {
         const offer = new CompanyOfferDto()
-        offer.description = "Superbe offre"
-        offer.keywords = ['php']
-        offer.salary = 320000
-        offer.type = ['CDI']
-        offer.status = 'Open'
-        offer.isOpen = true
-        return offer
+        // TODO: pblm d'eslint
+        //@ts-ignore
+        offer.description = createCompanyOfferDto.description
+        //@ts-ignore
+        offer.keywords = createCompanyOfferDto.keywords
+        //@ts-ignore
+        offer.salary = createCompanyOfferDto.salary
+        //@ts-ignore
+        offer.type = createCompanyOfferDto.type
+        //@ts-ignore
+        offer.status = createCompanyOfferDto.status
+        //@ts-ignore
+        offer.isOpen = createCompanyOfferDto.isOpen
+        return await this.companiesService.createOffer(offer, +companyId)
     }
 
     @ApiResponse({status: 200, type: CompanyOfferDto, isArray: true, description: 'Get all offers for a company'})

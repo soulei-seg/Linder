@@ -4,7 +4,6 @@ import {CompaniesService} from '../application/companies.service';
 import {CreateCompanyDto} from './dto/company/create-company.dto';
 import {UpdateCompanyDto} from './dto/company/update-company.dto';
 import {CompanyDto} from "./dto/company/company.dto";
-import {CompanyDao} from "../persistence/dao/company.dao";
 import {Company} from "../application/model/company.model";
 
 @Controller('companies')
