@@ -16,7 +16,7 @@ describe('Gestion des profiles des candidats',  () => {
         await app.init();
     });
 
-    it('/ (GET)', async () => {
+    it('/candidates (POST)', async () => {
         const createProfileDto: CreateProfileDto = new CreateProfileDto();
         // @ts-ignore
         createProfileDto.salary = 32000;
@@ -25,7 +25,7 @@ describe('Gestion des profiles des candidats',  () => {
         // @ts-ignore
         createProfileDto.key_words = ['Micro-service', 'Java', 'Kotlin'];
         // @ts-ignore
-        createProfileDto.email = 'antoine.lebossdu33@gmail.com';
+        createProfileDto.email = 'antoine.lebossdu' + Math.floor(Math.random() * 9999999) + '@gmail.com';
         // @ts-ignore
         createProfileDto.first_name = 'Antoine';
         // @ts-ignore

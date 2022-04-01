@@ -16,7 +16,7 @@ describe('Gestion des offres', () => {
     await app.init();
   });
 
-  it('/ (GET)', async () => {
+  it('/companies/companyId/offers (POST)', async () => {
     const createOfferDto: CreateCompanyOfferDto = new CreateCompanyOfferDto();
     // @ts-ignore
     createOfferDto.salary = 35000
@@ -27,7 +27,7 @@ describe('Gestion des offres', () => {
     //@ts-ignore
     createOfferDto.type = ["CDI"]
     //@ts-ignore
-    createOfferDto.status = 'Open'
+    createOfferDto.status = 'OPEN'
     //@ts-ignore
     createOfferDto.isOpen = false
     const response = await request(app.getHttpServer())
