@@ -11,19 +11,19 @@ export class CompaniesRepository {
         return companyDao.id
     }
 
-    findAll() {
-        return ;
+    async findAll(): Promise<CompanyDao[]> {
+        return (await axios.get(this.BASE_URL)).data;
     }
 
     findOne(id: number) {
-        return ;
+        return;
     }
 
     update(id: number, company: CompanyDao) {
-        return ;
+        return;
     }
 
     remove(id: number) {
-        return ;
+        return;
     }
 }

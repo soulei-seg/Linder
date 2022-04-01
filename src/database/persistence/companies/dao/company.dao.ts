@@ -12,10 +12,10 @@ export class CompanyDao {
     @Column()
     siren: number;
 
-    @Column()
+    @Column({nullable: true})
     description: string;
 
-    @Column()
+    @Column({nullable: true})
     logo: string;
 
     @Column()

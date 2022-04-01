@@ -1,0 +1,1 @@
+export const CompanySirenAlreadyExist: string = "Company SIREN already exists";
