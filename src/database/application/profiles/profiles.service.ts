@@ -39,6 +39,7 @@ export class ProfilesService {
         profile.last_name = profileDao.last_name
         profile.salary = profileDao.salary
         profile.type = profileDao.type
+        profile.photo_url = profileDao.photo_url
         return profile;
     }
 
@@ -52,6 +53,7 @@ export class ProfilesService {
         profileDao.last_name = profile.last_name
         profileDao.salary = profile.salary
         profileDao.type = profile.type
+        profileDao.photo_url = profile.photo_url
         return profileDao;
     }
 }

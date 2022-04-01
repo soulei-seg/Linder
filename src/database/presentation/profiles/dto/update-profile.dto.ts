@@ -14,8 +14,8 @@ export class UpdateProfileDto extends PartialType(CreateProfileDto) {
 
     key_words: string[];
 
-    salary: string;
+    salary: number;
 
-    type: string;
+    type: string[];
 
 }

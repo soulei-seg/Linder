@@ -6,6 +6,6 @@ export class Profile {
     email: string
     description: string
     key_words: string[]
-    salary: string
-    type: string
+    salary: number
+    type: string[]
 }

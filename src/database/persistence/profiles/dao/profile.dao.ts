@@ -27,10 +27,10 @@ export class ProfileDao {
     key_words: string[];
 
     @Column()
-    salary: string;
+    salary: number;
 
-    @Column()
-    type: string;
+    @Column("varchar", {array: true})
+    type: string[];
 
     @ManyToMany(() => OfferDao)
     @JoinTable()
@@ -57,9 +57,9 @@ export class ProfileToAddDao {
 
     key_words: string[];
 
-    salary: string;
+    salary: number;
 
-    type: string;
+    type: string[];
 
     offers: OfferDao[];
 
@@ -67,7 +67,7 @@ export class ProfileToAddDao {
 
     matches: MatchDao[];
 
-    constructor(photo_url: string, first_name: string, last_name: string, email: string, description: string, key_words: string[], salary: string, type: string) {
+    constructor(photo_url: string, first_name: string, last_name: string, email: string, description: string, key_words: string[], salary: number, type: string[]) {
         this.photo_url = photo_url;
         this.first_name = first_name;
         this.last_name = last_name;
@@ -92,9 +92,9 @@ export class ProfileToUpdateDao {
 
     key_words: string[];
 
-    salary: string;
+    salary: number;
 
-    type: string;
+    type: string[];
 
     offers: OfferDao[];
 
@@ -102,7 +102,7 @@ export class ProfileToUpdateDao {
 
     matches: MatchDao[];
 
-    constructor(photo_url: string, first_name: string, last_name: string, email: string, description: string, key_words: string[], salary: string, type: string) {
+    constructor(photo_url: string, first_name: string, last_name: string, email: string, description: string, key_words: string[], salary: number, type: string[]) {
         this.photo_url = photo_url;
         this.first_name = first_name;
         this.last_name = last_name;

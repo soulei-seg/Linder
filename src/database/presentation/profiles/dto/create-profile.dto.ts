@@ -6,10 +6,10 @@ export class CreateProfileDto {
     email: string
     description: string
     key_words: string[]
-    salary: string
-    type: string
+    salary: number
+    type: string[]
 
-    constructor(photo_url: string, first_name: string, last_name: string, email: string, description: string, key_words: string[], salary: string, type: string) {
+    constructor(photo_url: string, first_name: string, last_name: string, email: string, description: string, key_words: string[], salary: number, type: string[]) {
         this.photo_url = photo_url;
         this.first_name = first_name;
         this.last_name = last_name;
