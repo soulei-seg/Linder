@@ -1,18 +1,39 @@
 import {ApiProperty} from "@nestjs/swagger";
+import {IsArray, IsBoolean, IsNotEmpty, IsNumber, IsString} from "class-validator";
 
 export class OfferDto {
+    @IsString()
+    @IsNotEmpty()
     @ApiProperty()
-    description: string
+    description: string;
+
+    @IsArray()
+    @IsNotEmpty()
     @ApiProperty()
-    keywords: string[]
+    keywords: string[];
+
+    @IsNumber()
+    @IsNotEmpty()
     @ApiProperty()
-    salary: number
+    salary: number;
+
+    @IsArray()
+    @IsNotEmpty()
     @ApiProperty()
-    type: string[]
+    type: string[];
+
+    @IsString()
+    @IsNotEmpty()
     @ApiProperty()
-    status: string
+    status: string;
+
+    @IsBoolean()
+    @IsNotEmpty()
     @ApiProperty()
-    isOpen: boolean
+    isOpen: boolean;
+
+    @IsNumber()
+    @IsNotEmpty()
     @ApiProperty()
     companyId: number;
 }

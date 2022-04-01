@@ -1,16 +1,20 @@
-import {Controller, Get, Post, Body, Patch, Param, Delete} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, Patch, Post} from '@nestjs/common';
 import {ApiResponse, ApiTags} from '@nestjs/swagger';
 import {OffersService} from '../application/offers.service';
 import {CreateOfferDto} from './dto/create-offer.dto';
 import {UpdateOfferDto} from './dto/update-offer.dto';
 import {OfferDto} from "./dto/offer.dto";
 import {Offer} from "../application/model/offer.model";
+import {offerStatusInvalidException} from "../../exceptions/offers-exceptions";
+
 
 @Controller('offers')
 @ApiTags('offers')
 export class OffersController {
     constructor(private readonly offersService: OffersService) {
     }
+
+    OFFER_STATUS = ['OPEN', 'PROVIDED', 'CLOSE']
 
     @ApiResponse({status: 201, type: OfferDto, description: 'Create a new offer'})
     @Post()
@@ -27,6 +31,11 @@ export class OffersController {
         offer.type = createOfferDto.type;
         // @ts-ignore
         offer.status = createOfferDto.status;
+
+        if (!this.OFFER_STATUS.includes(offer.status)) {
+            throw new offerStatusInvalidException()
+        }
+
         // @ts-ignore
         offer.open_to_recruiters = createOfferDto.isOpen;
         // @ts-ignore
