@@ -8,7 +8,8 @@ import {CompanyRepository} from "./persistence/companies/company.repository";
 @Module({
     imports: [TypeOrmModule.forFeature([CompanyDao])],
     controllers: [CompaniesController],
-    providers: [CompaniesService, CompanyRepository]
+    providers: [CompaniesService, CompanyRepository],
+    exports: [CompaniesService, CompanyRepository]
 })
 export class CompaniesModule {
 }

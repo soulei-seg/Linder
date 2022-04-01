@@ -21,7 +21,7 @@ export class OffersService {
     }
 
     public async update(id: number, offer: Offer): Promise<void> {
-        await this.offersRepository.update(id, offer)
+        return ;
     }
 
     public async remove(id: number): Promise<void> {

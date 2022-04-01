@@ -4,16 +4,27 @@ import {UpdateOfferDto} from "./dto/update-offer.dto";
 import {OffersService} from "../../application/offers/offers.service";
 import {ApiTags} from "@nestjs/swagger";
 import {OfferDto} from "./dto/offer.dto";
+import {Offer} from "../../application/offers/model/offer.model";
+import {CompaniesService} from "../../application/companies/companies.service";
 
 @Controller('databases/offers')
 @ApiTags('databases')
 export class OffersController {
-    constructor(private readonly offersService: OffersService) {
+    constructor(private readonly offersService: OffersService, private readonly companiesService: CompaniesService) {
     }
 
     @Post()
     public async create(@Body() createOfferDto: CreateOfferDto): Promise<OfferDto> {
-        return await this.offersService.create(createOfferDto);
+        const offer = new Offer();
+        offer.id = createOfferDto.id;
+        offer.description = createOfferDto.description;
+        offer.key_words = createOfferDto.key_words;
+        offer.salary = createOfferDto.salary;
+        offer.type = createOfferDto.type;
+        offer.status = createOfferDto.status;
+        offer.open_to_recruiters = createOfferDto.open_to_recruiters;
+        offer.company = await this.companiesService.findOne(createOfferDto.companyId)
+        return await this.offersService.create(offer);
     }
 
     @Get()
@@ -28,7 +39,15 @@ export class OffersController {
 
     @Patch(':id')
     public async update(@Param('id') id: string, @Body() updateOfferDto: UpdateOfferDto): Promise<void> {
-        return await this.offersService.update(+id, updateOfferDto);
+        const offer = new Offer();
+        offer.id = updateOfferDto.id;
+        offer.description = updateOfferDto.description;
+        offer.key_words = updateOfferDto.key_words;
+        offer.salary = updateOfferDto.salary;
+        offer.type = updateOfferDto.type;
+        offer.status = updateOfferDto.status;
+        offer.open_to_recruiters = updateOfferDto.open_to_recruiters;
+        return await this.offersService.update(+id, offer);
     }
 
     @Delete(':id')
