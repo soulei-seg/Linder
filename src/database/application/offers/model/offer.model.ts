@@ -2,8 +2,10 @@ import {ProfileDao} from "../../../persistence/profiles/dao/profile.dao";
 import {CompanyDao} from "../../../persistence/companies/dao/company.dao";
 import {MatchDao} from "../../../persistence/matches/dao/match.dao";
 import {ContractDao} from "../../../persistence/contracts/dao/contract.dao";
+import {Company} from "../../companies/model/offer.model";
 
 export class Offer {
+    id: number;
     description: string;
 
     key_words: string[];
@@ -18,7 +20,7 @@ export class Offer {
 
     profiles: ProfileDao[];
 
-    company: CompanyDao;
+    company: Company;
 
     contract: ContractDao;
 

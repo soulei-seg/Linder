@@ -13,4 +13,6 @@ export class OfferDto {
     status: string
     @ApiProperty()
     isOpen: boolean
+    @ApiProperty()
+    companyId: number;
 }
