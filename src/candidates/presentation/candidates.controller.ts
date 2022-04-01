@@ -1,4 +1,4 @@
-import {Controller, Get, Post, Body, Patch, Param, Delete} from '@nestjs/common';
+import {Controller, Get, Post, Body, Patch, Param, Delete, UseFilters} from '@nestjs/common';
 import {ApiResponse, ApiTags} from '@nestjs/swagger';
 import {CandidatesService} from '../application/candidates.service';
 import { CandidateDto } from './dto/candidate.dto';
@@ -6,6 +6,7 @@ import {CreateCandidateDto} from './dto/create-candidate.dto';
 import {UpdateCandidateDto} from './dto/update-candidate.dto';
 import {OfferDto} from "./dto/offer.dto";
 import {SwipeOfferDto} from "./dto/swipe-offer.dto";
+import {HttpExceptionFilter} from "../../exceptions/http-exception.filter";
 
 @Controller('candidates')
 @ApiTags('candidates')
@@ -13,31 +14,44 @@ export class CandidatesController {
     constructor(private readonly candidatesService: CandidatesService) {
     }
 
+    @UseFilters(new HttpExceptionFilter())
     @Post()
     @ApiResponse({ status: 201, description: 'Create one candidate.', type: CandidateDto})
-    create(@Body() createCandidateDto: CreateCandidateDto): CandidateDto {
-        const candidate = new CandidateDto();
-        candidate.picture = 'https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png'
-        candidate.firstname = 'Sam';
-        candidate.lastname = 'Lescasse';
-        candidate.mail = 'ballbriser@split.com';
-        candidate.keywords = ['java', 'sql', 'dotnet'];
-        candidate.salary = 2000;
-        candidate.offerType = ['cdi'];
-        return candidate
+    async create(@Body() createCandidateDto: CreateCandidateDto): Promise<number> {
+        const candidateDto = new CandidateDto();
+        // @ts-ignore
+        candidateDto.photo_url = createCandidateDto.photo_url
+        // @ts-ignore
+        candidateDto.first_name =  createCandidateDto.first_name
+        // @ts-ignore
+        candidateDto.description = createCandidateDto.description
+        // @ts-ignore
+        candidateDto.last_name = createCandidateDto.last_name
+        // @ts-ignore
+        candidateDto.email = createCandidateDto.email
+        // @ts-ignore
+        candidateDto.key_words = createCandidateDto.key_words
+        // @ts-ignore
+        candidateDto.salary = createCandidateDto.salary
+        // @ts-ignore
+        candidateDto.type = createCandidateDto.type
+        // @ts-ignore
+        const candidateId: number = await this.candidatesService.create(candidateDto);
+        return candidateId;
     }
 
     @Get()
     @ApiResponse({ status: 200, description: 'Get all candidates.', type: CandidateDto, isArray: true})
     findAll(): CandidateDto[] {
         const candidate = new CandidateDto();
-        candidate.picture = 'https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png'
-        candidate.firstname = 'John';
-        candidate.lastname = 'DOE';
-        candidate.mail = 'johndoe@florian.lafuente.fr';
-        candidate.keywords = ['php', 'javascript', 'html', 'css'];
+        candidate.photo_url = 'https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png'
+        candidate.first_name = 'John';
+        candidate.description = 'Salut';
+        candidate.last_name = 'DOE';
+        candidate.email = 'johndoe@florian.lafuente.fr';
+        candidate.key_words = ['php', 'javascript', 'html', 'css'];
         candidate.salary = 2000;
-        candidate.offerType = ['cdi', 'cdd'];
+        candidate.type = ['cdi', 'cdd'];
         return [candidate]
     }
 
@@ -45,13 +59,14 @@ export class CandidatesController {
     @ApiResponse({ status: 200, description: 'Get one candidate.', type: CandidateDto})
     findOne(@Param('id') id: string): CandidateDto {
         const candidate = new CandidateDto();
-        candidate.picture = 'https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png'
-        candidate.firstname = 'John';
-        candidate.lastname = 'DOE';
-        candidate.mail = 'johndoe@florian.lafuente.fr';
-        candidate.keywords = ['php', 'javascript', 'html', 'css'];
+        candidate.photo_url = 'https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png'
+        candidate.first_name = 'John';
+        candidate.last_name = 'DOE';
+        candidate.description = 'Salut';
+        candidate.email = 'johndoe@florian.lafuente.fr';
+        candidate.key_words = ['php', 'javascript', 'html', 'css'];
         candidate.salary = 2000;
-        candidate.offerType = ['cdi', 'cdd'];
+        candidate.type = ['cdi', 'cdd'];
         return candidate
     }
 
@@ -59,13 +74,14 @@ export class CandidatesController {
     @ApiResponse({ status: 200, description: 'Edit a candidate.', type: CandidateDto})
     update(@Param('id') id: string, @Body() updateCandidateDto: UpdateCandidateDto): CandidateDto {
         const candidate = new CandidateDto();
-        candidate.picture = 'https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png'
-        candidate.firstname = 'John';
-        candidate.lastname = 'DOE';
-        candidate.mail = 'johndoe@florian.lafuente.fr';
-        candidate.keywords = ['php', 'nodejs', 'nestjs', 'html', 'css', 'management', 'teamwork', 'AgIiilLLeEEe :B...gateauuu'];
+        candidate.photo_url = 'https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png'
+        candidate.first_name = 'John';
+        candidate.last_name = 'DOE';
+        candidate.description = 'Salut';
+        candidate.email = 'johndoe@florian.lafuente.fr';
+        candidate.key_words = ['php', 'nodejs', 'nestjs', 'html', 'css', 'management', 'teamwork', 'AgIiilLLeEEe :B...gateauuu'];
         candidate.salary = 2200;
-        candidate.offerType = ['cdi', 'cdd', 'stage pour faire le café (cf. Antoine Nicolleau <3)'];
+        candidate.type = ['cdi', 'cdd', 'stage pour faire le café (cf. Antoine Nicolleau <3)'];
         return candidate
     }
 

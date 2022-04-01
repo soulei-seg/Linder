@@ -1,18 +1,45 @@
 import { ApiProperty } from "@nestjs/swagger"
+import {IsArray, IsNotEmpty, IsString, IsNumber} from "class-validator";
 
 export class CandidateDto {
+
+    @IsString()
+    @IsNotEmpty()
     @ApiProperty()
-    picture: string
+    photo_url: string
+
+    @IsString()
+    @IsNotEmpty()
     @ApiProperty()
-    firstname: string
+    first_name: string
+
+    @IsString()
+    @IsNotEmpty()
     @ApiProperty()
-    lastname: string
+    last_name: string
+
+    @IsString()
+    @IsNotEmpty()
     @ApiProperty()
-    mail: string
+    description: string
+
+    @IsString()
+    @IsNotEmpty()
     @ApiProperty()
-    keywords: string[]
+    email: string
+
+    @IsArray()
+    @IsNotEmpty()
+    @ApiProperty()
+    key_words: string[]
+
+    @IsNumber()
+    @IsNotEmpty()
     @ApiProperty()
     salary: number
+
+    @IsArray()
+    @IsNotEmpty()
     @ApiProperty()
-    offerType: string[]
+    type: string[]
 }
