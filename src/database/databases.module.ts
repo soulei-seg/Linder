@@ -11,6 +11,8 @@ import {CompanyDao} from "./persistence/companies/dao/company.dao";
 import {ContractDao} from "./persistence/contracts/dao/contract.dao";
 import {MatchDao} from "./persistence/matches/dao/match.dao";
 import {FinanceDao} from "./persistence/finances/dao/finance.dao";
+import {CompaniesService} from "./application/companies/companies.service";
+import {CompanyRepository} from "./persistence/companies/company.repository";
 
 @Module({
     imports: [TypeOrmModule.forRoot({
@@ -23,7 +25,8 @@ import {FinanceDao} from "./persistence/finances/dao/finance.dao";
         entities: [OfferDao, ProfileDao, CompanyDao, ContractDao, MatchDao, FinanceDao],
         synchronize: true,
     }),
-        OffersModule, ProfilesModule, ContractsModule, CompaniesModule, MatchesModule]
+        OffersModule, ProfilesModule, ContractsModule, CompaniesModule, MatchesModule],
+    exports: [CompaniesModule]
 })
 export class DatabasesModule {
 }

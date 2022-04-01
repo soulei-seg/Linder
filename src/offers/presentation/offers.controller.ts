@@ -4,6 +4,7 @@ import {OffersService} from '../application/offers.service';
 import {CreateOfferDto} from './dto/create-offer.dto';
 import {UpdateOfferDto} from './dto/update-offer.dto';
 import {OfferDto} from "./dto/offer.dto";
+import {Offer} from "../application/model/offer.model";
 
 @Controller('offers')
 @ApiTags('offers')
@@ -13,14 +14,25 @@ export class OffersController {
 
     @ApiResponse({status: 201, type: OfferDto, description: 'Create a new offer'})
     @Post()
-    create(@Body() createOfferDto: CreateOfferDto): OfferDto {
-        const offer = new OfferDto()
-        offer.description = "Nouvelle offre"
-        offer.keywords = ['PHP', 'html']
-        offer.status = "is Open"
-        offer.salary = 24000
-        offer.isOpen = false
-        return offer
+    async create(@Body() createOfferDto: CreateOfferDto): Promise<number> {
+        const offer = new Offer()
+        // TODO: Problème d'ESLint à régler à cause du OmitType
+        // @ts-ignore
+        offer.description = createOfferDto.description;
+        // @ts-ignore
+        offer.key_words = createOfferDto.keywords;
+        // @ts-ignore
+        offer.salary = createOfferDto.salary;
+        // @ts-ignore
+        offer.type = createOfferDto.type;
+        // @ts-ignore
+        offer.status = createOfferDto.status;
+        // @ts-ignore
+        offer.open_to_recruiters = createOfferDto.isOpen;
+        // @ts-ignore
+        offer.companyId = createOfferDto.companyId;
+        const offerId: number = await this.offersService.create(offer);
+        return offerId;
     }
 
     @ApiResponse({status: 200, type: OfferDto, isArray: true, description: 'Get all offers'})

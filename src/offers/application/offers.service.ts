@@ -8,24 +8,25 @@ export class OffersService {
     constructor(private readonly offersRepository: OffersRepository) {
     }
 
-    create(offer: Offer) {
-        return this.offersRepository.create(offer)
+    async create(offer: Offer): Promise<number> {
+        const offerId: number = await this.offersRepository.create(this.mapModelToDao(offer));
+        return offerId;
     }
 
     findAll() {
-        return this.offersRepository.findAll()
+        return ;
     }
 
     findOne(id: number) {
-        return this.offersRepository.findOne(id)
+        return ;
     }
 
     update(id: number, offer: Offer) {
-        return this.offersRepository.update(id, offer)
+        return ;
     }
 
     remove(id: number) {
-        return this.offersRepository.remove(id)
+        return ;
     }
 
     private mapDaoToModel(offerDao: OfferDao): Offer {
@@ -35,6 +36,13 @@ export class OffersService {
 
     private mapModelToDao(offer: Offer): OfferDao {
         const offerDao = new OfferDao();
+        offerDao.description = offer.description;
+        offerDao.key_words = offer.key_words;
+        offerDao.salary = offer.salary;
+        offerDao.type = offer.type;
+        offerDao.status = offer.status;
+        offerDao.open_to_recruiters = offer.open_to_recruiters;
+        offerDao.companyId = offer.companyId;
         return offerDao;
     }
 }

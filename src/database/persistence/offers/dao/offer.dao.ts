@@ -3,11 +3,12 @@ import {ProfileDao} from "../../profiles/dao/profile.dao";
 import {CompanyDao} from "../../companies/dao/company.dao";
 import {MatchDao} from "../../matches/dao/match.dao";
 import {ContractDao} from "../../contracts/dao/contract.dao";
+import {Company} from "../../../application/companies/model/offer.model";
 
 @Entity()
 export class OfferDao {
     @PrimaryGeneratedColumn()
-    id: string;
+    id: number;
 
     @Column()
     description: string;
@@ -58,7 +59,7 @@ export class OfferToAddDao {
 
     profiles: ProfileDao[];
 
-    company: CompanyDao;
+    company: Company;
 
     contract: ContractDao;
 

@@ -1,25 +1,29 @@
 import {Injectable} from '@nestjs/common';
 import {OfferDao} from "./dao/offer.dao";
+import axios from "axios";
 
 @Injectable()
 export class OffersRepository {
-    create(offer: OfferDao) {
-        return 'This action adds a new cat';
+    BASE_URL: string = "http://localhost:3000/databases/offers";
+
+    async create(offer: OfferDao) {
+        const offerDao: OfferDao = (await axios.post(this.BASE_URL, offer)).data;
+        return offerDao.id
     }
 
     findAll() {
-        return `This action returns all cats`;
+        return ;
     }
 
     findOne(id: number) {
-        return `This action returns a #${id} cat`;
+        return ;
     }
 
-    update(id: number, offer: OfferDao) {
-        return `This action updates a #${id} cat`;
+    update(id: number, company: OfferDao) {
+        return ;
     }
 
     remove(id: number) {
-        return `This action removes a #${id} cat`;
+        return ;
     }
 }
