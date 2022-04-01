@@ -6,6 +6,7 @@ import {ApiResponse, ApiTags} from "@nestjs/swagger";
 import {CompanyOfferDto} from "./dto/offer/company-offer.dto";
 import {ProfileDto} from "./dto/profile/profile.dto";
 import {SwipeProfileDto} from "./dto/profile/swipe-profile.dto";
+import {Profile} from "../../profiles/application/model/profile.model";
 
 @Controller('companies/:companyId/offers')
 @ApiTags('companies')
@@ -73,13 +74,13 @@ export class CompaniesOfferController {
 
     @ApiResponse({status: 200, type: ProfileDto, isArray: true, description: 'Get all profiles candidates that might match with the offer'})
     @Get(':id/candidates/')
-    async findAllProfile(@Param(':id') id: string, @Param('candidateId') candidateId: string): Promise<ProfileDto[]>{
+    async findAllProfile(@Param('id') id: string, @Param('companyId') companyId: string): Promise<Profile[]>{
         return await this.companiesService.findPotentialProfiles(+id);
     }
 
     @ApiResponse({status: 200, type: ProfileDto, description: 'Get a profile that might match with the offer'})
     @Get(':id/matches/')
-    findOneProfile(@Param(':id') id: string, @Param('companyId') companyId: string): ProfileDto {
+    findOneProfile(@Param('id') id: string, @Param('companyId') companyId: string): ProfileDto {
         const profile = new ProfileDto()
         profile.photo = "https://jean.fr/avatar.png"
         profile.description = "Développeur junior"

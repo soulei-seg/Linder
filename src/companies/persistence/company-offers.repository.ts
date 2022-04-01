@@ -7,7 +7,7 @@ import {ProfileDao} from "../../profiles/persistence/dao/profile.dao";
 @Injectable()
 export class CompanyOffersRepository {
     BASE_URL: string = "http://localhost:3000/offers";
-    PROFILE_URL: string = "http://localhost:3000/profiles";
+    PROFILE_URL: string = "http://localhost:3000/profiles/";
 
     async create(companyOfferDao: CompanyOfferDao): Promise<number> {
         return (await axios.post(this.BASE_URL, companyOfferDao)).data;
@@ -18,8 +18,7 @@ export class CompanyOffersRepository {
     }
 
     async findPotentialProfiles(offerId : number): Promise<ProfileDao[]>{
-        return (await axios.get(this.PROFILE_URL + offerId)).data;
-
+        return (await axios.get(this.PROFILE_URL)).data;
     }
 
     findOne(id: number) {
