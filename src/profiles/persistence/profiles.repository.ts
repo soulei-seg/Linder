@@ -11,19 +11,19 @@ export class ProfilesRepository {
         return profileDao.id;
     }
 
-    findAll() {
-        return ;
+    async findAll() {
+        return (await axios.get(this.BASE_URL)).data;
     }
 
     findOne(id: number) {
-        return ;
+        return;
     }
 
     update(id: number, profile: ProfileDao) {
-        return ;
+        return;
     }
 
     remove(id: number) {
-        return ;
+        return;
     }
 }

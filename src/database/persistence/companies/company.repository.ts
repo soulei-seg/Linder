@@ -1,5 +1,5 @@
 import {Injectable} from '@nestjs/common';
-import {CompanyDao, CompanyToAddDao, CompanyToUpdateDao} from "./dao/company.dao";
+import {CompanyDao} from "./dao/company.dao";
 import {InjectRepository} from "@nestjs/typeorm";
 import {Repository} from "typeorm";
 
@@ -12,6 +12,7 @@ export class CompanyRepository {
     }
 
     public async create(companyToAddDao: CompanyDao): Promise<CompanyDao> {
+        companyToAddDao.date = (new Date()).toString()
         return await this.database.save(companyToAddDao);
     }
 

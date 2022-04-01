@@ -1,10 +1,11 @@
-import {Controller, Get, Post, Body, Patch, Param, Delete} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, Patch, Post, UseFilters} from '@nestjs/common';
 import {ApiResponse, ApiTags} from '@nestjs/swagger';
 import {CompaniesService} from '../application/companies.service';
 import {CreateCompanyDto} from './dto/company/create-company.dto';
 import {UpdateCompanyDto} from './dto/company/update-company.dto';
 import {CompanyDto} from "./dto/company/company.dto";
 import {Company} from "../application/model/company.model";
+import {HttpExceptionFilter} from "../../exceptions/http-exception.filter";
 
 @Controller('companies')
 @ApiTags('companies')
@@ -12,6 +13,7 @@ export class CompaniesController {
     constructor(private readonly companiesService: CompaniesService) {
     }
 
+    @UseFilters(new HttpExceptionFilter())
     @ApiResponse({status: 201, type: CompanyDto, description: 'Create a new company and return the id'})
     @Post()
     async create(@Body() createCompanyDto: CreateCompanyDto): Promise<number> {

@@ -1,10 +1,11 @@
 import {Injectable} from '@nestjs/common';
-import { CompaniesRepository } from '../persistence/companies.repository';
+import {CompaniesRepository} from '../persistence/companies.repository';
 import {CompanyDao} from "../persistence/dao/company.dao";
 import {Company} from "./model/company.model";
 import {CompanyOffersRepository} from "../persistence/company-offers.repository";
 import {CompanyOffer} from "./model/company-offer.model";
 import {CompanyOfferDao} from "../persistence/dao/company-offer.dao";
+import {CompanySirenAlreadyExistException} from "../../exceptions/companies-exceptions";
 
 @Injectable()
 export class CompaniesService {
@@ -13,8 +14,14 @@ export class CompaniesService {
     }
 
     async create(company: Company): Promise<number> {
-        const companyId: number = await this.companiesRepository.create(this.mapModelToDao(company))
-        return companyId;
+        const companies: Company[] = await this.companiesRepository.findAll();
+
+        companies.forEach((companySaved) => {
+            if (companySaved.siren === company.siren) {
+                throw new CompanySirenAlreadyExistException();
+            }
+        })
+        return await this.companiesRepository.create(this.mapModelToDao(company))
     }
 
     async createOffer(offer: CompanyOffer, companyId: number): Promise<number> {
@@ -32,19 +39,19 @@ export class CompaniesService {
     }
 
     findAll() {
-        return ;
+        return;
     }
 
     findOne(id: number) {
-        return ;
+        return;
     }
 
     update(id: number, company: Company) {
-        return ;
+        return;
     }
 
     remove(id: number) {
-        return ;
+        return;
     }
 
     private mapDaoToModel(companyDao: CompanyDao): Company {

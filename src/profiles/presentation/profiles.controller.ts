@@ -1,10 +1,11 @@
-import {Controller, Get, Post, Body, Patch, Param, Delete} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, Patch, Post, UseFilters} from '@nestjs/common';
 import {ApiResponse, ApiTags} from '@nestjs/swagger';
 import {ProfilesService} from '../application/profiles.service';
 import {CreateProfileDto} from './dto/create-profile.dto';
 import {UpdateProfileDto} from './dto/update-profile.dto';
 import {ProfileDto} from "./dto/profile.dto";
 import {Profile} from "../application/model/profile.model";
+import {HttpExceptionFilter} from "../../exceptions/http-exception.filter";
 
 @Controller('profiles')
 @ApiTags('profiles')
@@ -12,7 +13,8 @@ export class ProfilesController {
     constructor(private readonly profilesService: ProfilesService) {
     }
 
-    @ApiResponse({ status: 201, description: 'Create one profile.', type: ProfileDto})
+    @UseFilters(new HttpExceptionFilter())
+    @ApiResponse({status: 201, description: 'Create one profile.', type: ProfileDto})
     @Post()
     async create(@Body() createProfileDto: CreateProfileDto): Promise<number> {
         const profile = new Profile();
@@ -37,7 +39,7 @@ export class ProfilesController {
         return profileId;
     }
 
-    @ApiResponse({ status: 200, description: 'Get all profiles.', type: ProfileDto, isArray: true})
+    @ApiResponse({status: 200, description: 'Get all profiles.', type: ProfileDto, isArray: true})
     @Get()
     findAll(): ProfileDto[] {
         const profile = new ProfileDto();
@@ -52,7 +54,7 @@ export class ProfilesController {
         return [profile];
     }
 
-    @ApiResponse({ status: 200, description: 'Get one profile.', type: ProfileDto})
+    @ApiResponse({status: 200, description: 'Get one profile.', type: ProfileDto})
     @Get(':id')
     findOne(@Param('id') id: string): ProfileDto {
         const profile = new ProfileDto();
@@ -67,7 +69,7 @@ export class ProfilesController {
         return profile;
     }
 
-    @ApiResponse({ status: 200, description: 'Edit one profile.', type: ProfileDto})
+    @ApiResponse({status: 200, description: 'Edit one profile.', type: ProfileDto})
     @Patch(':id')
     update(@Param('id') id: string, @Body() updateProfileDto: UpdateProfileDto): ProfileDto {
         const profile = new ProfileDto();
@@ -82,15 +84,14 @@ export class ProfilesController {
         return profile;
     }
 
-    @ApiResponse({ status: 200, description: 'Delete a candidate.'})
+    @ApiResponse({status: 200, description: 'Delete a candidate.'})
     @Delete(':id')
     remove(@Param('id') id: string): void {
-        return ;
+        return;
     }
 
     private mapDtoToModel(profileDto: ProfileDto): Profile {
         const profile = new Profile();
-        profile.id = null
         profile.description = profileDto.description
         profile.last_name = profileDto.last_name
         profile.first_name = profileDto.first_name
@@ -104,7 +105,6 @@ export class ProfilesController {
 
     private mapModelToDto(profile: Profile): ProfileDto {
         const profileDto = new ProfileDto();
-        profileDto.id = null
         profileDto.description = profile.description
         profileDto.last_name = profile.last_name
         profileDto.first_name = profile.first_name
